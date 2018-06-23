@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.braulionova.taskapp.vista.CategoriaListaActivity;
 import com.braulionova.taskapp.vista.CrearCategoriaActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 Intent intent = new Intent(MainActivity.this, CrearCategoriaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btnVerCategorias = findViewById(R.id.btnVerCategoria);
+
+        btnVerCategorias.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MainActivity.this, CategoriaListaActivity.class);
                 startActivity(intent);
             }
         });

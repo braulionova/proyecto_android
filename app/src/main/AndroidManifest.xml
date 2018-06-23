@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vista.CrearCategoriaActivity"></activity>
+        <activity android:name=".vista.CrearCategoriaActivity" />
+        <activity android:name=".vista.CategoriaListaActivity"></activity>
     </application>
 
 </manifest>

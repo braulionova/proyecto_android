@@ -20,6 +20,13 @@
             android:text="Crear Categoria"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="2dp" />
+        <Button
+            android:id="@+id/btnVerCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Categorias"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="2dp" />
 
     </LinearLayout>
 

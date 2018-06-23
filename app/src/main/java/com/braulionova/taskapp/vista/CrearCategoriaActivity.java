@@ -33,7 +33,7 @@ public class CrearCategoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Categoria categoria = new Categoria();
-                categoria.setDescripcion(txtNombre.getText().toString());
+                categoria.setNombre(txtNombre.getText().toString());
                 //log
                 Log.i(LOG_TAG, categoria.toString());
                 //guardar
@@ -41,9 +41,9 @@ public class CrearCategoriaActivity extends AppCompatActivity {
                 //log
                 Log.i(LOG_TAG, categoria.toString());
                 //mensaje
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Guardado correctamente.", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "Guardado correctamente.", Toast.LENGTH_SHORT);
                 //toast1.setGravity(Gravity.CENTER,,);
-                toast1.show();
+                toast.show();
                 //en blanco luego de guardar
                 txtNombre.setText("");
             }
