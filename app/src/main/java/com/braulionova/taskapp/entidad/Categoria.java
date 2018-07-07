@@ -1,6 +1,7 @@
 package com.braulionova.taskapp.entidad;
+import java.io.Serializable;
 
-public class Categoria {
+public class Categoria implements Serializable{
     private Integer id;
     private String nombre;
 

@@ -9,6 +9,9 @@ import com.braulionova.taskapp.R;
 import com.braulionova.taskapp.entidad.Categoria;
 import com.braulionova.taskapp.repositorio.CategoriaRepositorio;
 import com.braulionova.taskapp.repositorio.CategoriaRepositorioImp;
+import android.widget.AdapterView;
+import android.view.View;
+import android.content.Intent;
 
 import java.util.List;
 
@@ -31,6 +34,19 @@ public class CategoriaListaActivity extends AppCompatActivity {
         ListView catListView = (ListView) findViewById(R.id.categoria_listview);
         //adapter
         catListView.setAdapter(new CategoriaListAdapter(this, categorias));
+        //list view
+        catListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                //categoria item
+                Categoria cat = (Categoria) adapterView.getItemAtPosition(i);
+                //intent
+                Intent regCatIntent = new Intent(CategoriaListaActivity.this, CrearCategoriaActivity.class);
+                regCatIntent.putExtra("categoria", cat);
+                startActivity(regCatIntent);
+            }
+        });
 
     }
 }

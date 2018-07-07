@@ -25,6 +25,11 @@ public class CategoriaRepositorioImp implements CategoriaRepositorio {
 
     @Override
     public boolean guardar(Categoria categoria) {
+
+        if(categoria.getId() != null && categoria.getId() > 0)
+        {
+            return actualizar(categoria);
+        }
         //datos de categoria
         ContentValues cv = new ContentValues();
         cv.put(CAMPO_NOMBRE, categoria.getNombre());
@@ -46,7 +51,18 @@ public class CategoriaRepositorioImp implements CategoriaRepositorio {
 
     @Override
     public boolean actualizar(Categoria categoria) {
-        return false;
+
+        //datos de categoria
+        ContentValues cv = new ContentValues();
+        cv.put(CAMPO_NOMBRE, categoria.getNombre());
+        //db
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+        int cantidad = db.update(TABLA_CATEGORIA, cv, "id = ?"
+                , new String[]{categoria.getId().toString()});
+        //cerrando la db
+        db.close();
+        //retorna false si la categoria no guardo
+        return cantidad > 0;
     }
 
     @Override
