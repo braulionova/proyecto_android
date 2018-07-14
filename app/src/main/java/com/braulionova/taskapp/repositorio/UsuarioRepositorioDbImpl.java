@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.braulionova.taskapp.entidad.Categoria;
 import com.braulionova.taskapp.entidad.Usuario;
@@ -12,13 +13,18 @@ import com.braulionova.taskapp.repositorio.db.ConexionDb;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.simbio.encryption.Encryption;
+
 public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
 
     private ConexionDb conexionDb;
 
     private static final String CAMPO_NOMBRE = "nombre";
     private static final String CAMPO_EMAIL = "email";
+    private static final String CAMPO_CONTRASENA = "contrasena";
+    private static final String CAMPO_TIPO_USUARIO = "tipoUsuario";
     private static final String TABLA_USUARIO = "usuario";
+
 
     public UsuarioRepositorioDbImpl(Context context)
     {
@@ -83,9 +89,17 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
-        String[] columnas = {"id", CAMPO_NOMBRE};
+        String[] columnas = {"email"};
+
+        String whereClause = "email = ?";
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add(buscar);
+
+        String[] selectionArgs = new String[arrayList.size()];
+        selectionArgs = arrayList.toArray(selectionArgs);
+
         //query
-        Cursor cr = db.query(TABLA_USUARIO, columnas, null, null
+        Cursor cr = db.query(TABLA_USUARIO, columnas, whereClause, selectionArgs
         ,null, null,null);
 
         cr.moveToFirst();
@@ -95,11 +109,24 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
             int id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+            Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
+            String decrypted = encryption.decryptOrNull(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+            String contrasena = decrypted;
+            String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPO_USUARIO));
+
 
             Usuario u = new Usuario();
             u.setId(id);
             u.setNombre(nombre);
             u.setEmail(email);
+            u.setContrasena(contrasena);
+            if(tipoUsuario == "TECNICO") {
+                u.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+            }
+            else
+            {
+                u.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+            }
             //add categoria
             usuarios.add(u);
             //move next

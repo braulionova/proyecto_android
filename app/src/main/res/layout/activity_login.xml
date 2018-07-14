@@ -26,25 +26,24 @@
         android:inputType="textPassword"
         android:hint="Contraseña"/>
 
-    <Button
-        android:id="@+id/btnIniciar"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnRegistrarse"
+            android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrarse" />
-    </TableRow>
+        <Button
+            android:id="@+id/btnIniciar"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar" />
+
+    </LinearLayout>
+
 </LinearLayout>

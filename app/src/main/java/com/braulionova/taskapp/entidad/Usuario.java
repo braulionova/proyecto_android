@@ -9,7 +9,7 @@ public class Usuario {
     private Integer id;
     private String nombre;
     private String email;
-    private String contraseña;
+    private String contrasena;
     private TipoUsuario tipoUsuario;
 
     public Integer getId() {
@@ -36,12 +36,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public TipoUsuario getTipoUsuario() {
@@ -58,7 +58,7 @@ public class Usuario {
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", contraseña='").append(contraseña).append('\'');
+        sb.append(", contraseña='").append(contrasena).append('\'');
         sb.append(", tipoUsuario=").append(tipoUsuario);
         sb.append('}');
         return sb.toString();

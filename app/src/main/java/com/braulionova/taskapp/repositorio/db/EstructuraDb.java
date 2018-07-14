@@ -6,7 +6,7 @@ public class EstructuraDb {
             "CREATE TABLE categoria ( id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT )";
     //tabla Usuario
     public static final String TABLA_USUARIO =
-            "CREATE TABLE usuario ( id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT)";
+            "CREATE TABLE usuario ( id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT, tipoUsuario TEXT, contrasena TEXT)";
     //tabla usuario_categoria
     public static final String TABLA_USUARIO_CATEGORIA =
             "CREATE TABLE usuario_categoria ( usuario_id INTEGER, categoria_id INTEGER)";
