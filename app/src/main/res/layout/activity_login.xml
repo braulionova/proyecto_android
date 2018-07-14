@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/usuario_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vista.LoginActivity">
+
+
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Usuario"/>
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Contraseña"/>
+
+    <Button
+        android:id="@+id/btnIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrarse" />
+    </TableRow>
+</LinearLayout>
