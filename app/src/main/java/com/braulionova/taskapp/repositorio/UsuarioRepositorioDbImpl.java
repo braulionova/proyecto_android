@@ -4,15 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
-import com.braulionova.taskapp.entidad.Categoria;
 import com.braulionova.taskapp.entidad.Usuario;
 import com.braulionova.taskapp.repositorio.db.ConexionDb;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import se.simbio.encryption.Encryption;
 
 public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
@@ -24,7 +19,6 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
     private static final String CAMPO_CONTRASENA = "contrasena";
     private static final String CAMPO_TIPO_USUARIO = "tipoUsuario";
     private static final String TABLA_USUARIO = "usuario";
-
 
     public UsuarioRepositorioDbImpl(Context context)
     {
@@ -42,6 +36,8 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
         ContentValues cv = new ContentValues();
         cv.put(CAMPO_NOMBRE, usuario.getNombre());
         cv.put(CAMPO_EMAIL, usuario.getEmail());
+        cv.put(CAMPO_CONTRASENA, usuario.getContrasena());
+        cv.put(CAMPO_TIPO_USUARIO, usuario.getTipoUsuario().name());
         //db
         SQLiteDatabase db = conexionDb.getWritableDatabase();
         Long id = db.insert(TABLA_USUARIO,null, cv);
@@ -81,9 +77,107 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
     }
 
     @Override
-    public List<Usuario> buscar(String buscar) {
+    public Usuario validarUsuario(String email, String contrasena) {
+        //usuario
+        Usuario usuario = null;
+        //sqllite
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+        //columnas
+        Cursor cr =  db.rawQuery("select * from " + TABLA_USUARIO + " where email = '" + email + "' and contrasena = '" + contrasena  + "'" , null);
+        //cursor
+        if (cr.moveToFirst())
+        {
+            do {
+                    int id = cr.getInt(cr.getColumnIndex("id"));
+                    String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+                    String email_usuario = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+                    Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
+                    String decrypted = encryption.decryptOrNull(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+                    String contrasena_usuario = decrypted;
+                    String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPO_USUARIO));
+                    //usuario
+                    usuario = new Usuario();
+                    usuario.setId(id);
+                    usuario.setNombre(nombre);
+                    usuario.setEmail(email_usuario);
+                    usuario.setContrasena(contrasena_usuario);
+                    if (tipoUsuario == "TECNICO") {
+                        usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+                    } else {
+                        usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+                    }
 
-        //TODO: buscar las categorias por su nombre (LIKE)
+                }
+                while (cr.moveToNext());
+        }
+        //close
+        cr.close();
+        //db close
+        db.close();
+        //return
+        return usuario;
+    }
+
+//    @Override
+////    public Usuario validarUsuario(String email, String contrasena) {
+////        //usuario
+////        Usuario usuario = null;
+////        //list
+////        //List<Usuario> usuarios = new ArrayList<>();
+////        //sqllite
+////        SQLiteDatabase db = conexionDb.getReadableDatabase();
+////        //columnas
+////        String[] columnas = {"email", "contrasena"};
+////        //where clause
+////        //String whereClause = "email =? and contrasena =?";
+////        //ArrayList<String> arrayList = new ArrayList<String>();
+////        //arrayList.add(email);
+////        //arrayList.add(contrasena);
+////        //selectionArgs
+////        //String[] selectionArgs = new String[arrayList.size()];
+////        //selectionArgs = arrayList.toArray(selectionArgs);
+////
+////        //query
+////        Cursor cr = db.query(TABLA_USUARIO, columnas, whereClause, selectionArgs
+////                ,null, null,null);
+////        //cursor
+////        if(cr != null && cr.getCount() > 0) {
+////            /* move to first */
+////            cr.moveToFirst();
+////            //reading
+////            while (!cr.isAfterLast()) {
+////                int id = cr.getInt(cr.getColumnIndex("id"));
+////                String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+////                String email_usuario = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+////                Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
+////                String decrypted = encryption.decryptOrNull(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+////                String contrasena_usuario = decrypted;
+////                String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPO_USUARIO));
+////                //usuario
+////                usuario = new Usuario();
+////                usuario.setId(id);
+////                usuario.setNombre(nombre);
+////                usuario.setEmail(email_usuario);
+////                usuario.setContrasena(contrasena_usuario);
+////                if (tipoUsuario == "TECNICO") {
+////                    usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+////                } else {
+////                    usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+////                }
+////                //move next
+////                cr.moveToNext();
+////            }
+////        }
+////        //close
+////        cr.close();
+////        //db close
+////        db.close();
+////        //return
+////        return usuario;
+////    }
+
+    @Override
+    public List<Usuario> buscar(String buscar) {
 
         List<Usuario> usuarios = new ArrayList<>();
 
@@ -138,5 +232,64 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
         //return
         return usuarios;
     }
+
+    @Override
+    public List<Usuario> buscar_todos() {
+        //list
+        List<Usuario> usuarios = new ArrayList<>();
+        //sqlite
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        //String[] columnas = {"email"};
+
+        //String whereClause = "email = ?";
+        //ArrayList<String> arrayList = new ArrayList<String>();
+        //arrayList.add(buscar);
+
+        //String[] selectionArgs = new String[arrayList.size()];
+        //selectionArgs = arrayList.toArray(selectionArgs);
+
+        //query
+        Cursor cr = db.query(TABLA_USUARIO, null, null, null
+                ,null, null,null);
+
+        cr.moveToFirst();
+
+        while (!cr.isAfterLast())
+        {
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+            Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
+            String decrypted = encryption.decryptOrNull(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+            String contrasena = decrypted;
+            String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPO_USUARIO));
+
+
+            Usuario u = new Usuario();
+            u.setId(id);
+            u.setNombre(nombre);
+            u.setEmail(email);
+            u.setContrasena(contrasena);
+            //u.setContrasena(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+            if(tipoUsuario == "TECNICO") {
+                u.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+            }
+            else
+            {
+                u.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+            }
+            //add categoria
+            usuarios.add(u);
+            //move next
+            cr.moveToNext();
+        }
+        //close
+        cr.close();
+        db.close();
+        //return
+        return usuarios;
+    }
+
 
 }
