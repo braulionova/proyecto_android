@@ -1,4 +1,4 @@
-package com.braulionova.taskapp;
+package com.braulionova.taskapp.vista;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,24 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.braulionova.taskapp.vista.CategoriaListaActivity;
-import com.braulionova.taskapp.vista.CrearCategoriaActivity;
+import com.braulionova.taskapp.R;
 
-public class MainActivity extends AppCompatActivity {
-
-    private static final String LOG_TAG = MainActivity.class.getName();
+public class MenuTecnicoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //clase categoria
-        //Categoria cat = new Categoria();
-
-        //cat.setDescripcion("CATEGORIA 1");
-        //cat.setId(2);
-        //log de la app
-        //Log.i(LOG_TAG, cat.toString());
+        setContentView(R.layout.activity_menu_tecnico);
 
         Button btnCategoria = findViewById(R.id.btnCategoria);
 
@@ -32,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, CrearCategoriaActivity.class);
+                Intent intent = new Intent(MenuTecnicoActivity.this, CrearCategoriaActivity.class);
                 startActivity(intent);
             }
         });
@@ -44,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, CategoriaListaActivity.class);
+                Intent intent = new Intent(MenuTecnicoActivity.this, CategoriaListaActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 }

@@ -101,7 +101,7 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
                     usuario.setNombre(nombre);
                     usuario.setEmail(email_usuario);
                     usuario.setContrasena(contrasena_usuario);
-                    if (tipoUsuario == "TECNICO") {
+                    if (tipoUsuario.equals("TECNICO")) {
                         usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
                     } else {
                         usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);

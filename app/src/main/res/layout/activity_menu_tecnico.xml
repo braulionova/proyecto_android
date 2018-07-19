@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vista.MenuTecnicoActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnListaTareas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lista de Tareas" />
+    <Button
+        android:id="@+id/btnListaTareasPendientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tareas Pendientes"/>
+
+    <Button
+        android:id="@+id/btnCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Categoria"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="2dp" />
+    <Button
+        android:id="@+id/btnVerCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver Categorias"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="2dp" />
+
+</LinearLayout>

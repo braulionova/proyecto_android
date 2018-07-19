@@ -128,12 +128,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity {
                         toast.show();
                         return;
                     }
-                    if(rdoBtnNormal.isChecked()) {
-                        usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+                    if(rdoBtnTecnico.isChecked()) {
+                        usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
                     }
                     else
                     {
-                        usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+                        usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
                     }
                     //log
                     Log.i(LOG_TAG, usuario.toString());

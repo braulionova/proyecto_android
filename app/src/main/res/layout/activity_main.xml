@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".vista.MenuUsuarioActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,19 +14,22 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnCategoria"
+            android:id="@+id/btnRegistrarTarea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Categoria"
+            android:text="Registrar Tarea"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="2dp" />
+
         <Button
-            android:id="@+id/btnVerCategoria"
+            android:id="@+id/btnVerTareas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ver Categorias"
+            android:text="Ver Tareas"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="2dp" />
+
+
 
     </LinearLayout>
 

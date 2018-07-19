@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.braulionova.taskapp.MainActivity;
 import com.braulionova.taskapp.R;
 import com.braulionova.taskapp.entidad.Usuario;
 import com.braulionova.taskapp.repositorio.UsuarioRepositorio;
@@ -66,17 +65,28 @@ public class LoginActivity extends Activity {
                     Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
                     String password_encrypted = encryption.encryptOrNull(txtContrasena.getText().toString());
                     Usuario usuario = usuarioRepositorio.validarUsuario(email, password_encrypted);
+                    //tipo usuario
+                    String tipoUsuario = usuario.getTipoUsuario().name();
                     //mensajes dependiendo el retorno
                     if (usuario == null) {
                         txtUsuario.setError("Email o Contraseña incorrectos, revise y vuelva a intentar.");
                         txtUsuario.requestFocus();
                         return;
-                    } else {
+                    }
+                    else if(tipoUsuario == "TECNICO") {
                         //mensaje
                         Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido, " + usuario.getNombre(), Toast.LENGTH_LONG);
                         toast.show();
                         //ir al menu principal
-                        Intent menuIntent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent menuIntent = new Intent(LoginActivity.this, MenuTecnicoActivity.class);
+                        startActivity(menuIntent);
+                    }
+                    else {
+                        //mensaje
+                        Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido, " + usuario.getNombre(), Toast.LENGTH_LONG);
+                        toast.show();
+                        //ir al menu principal
+                        Intent menuIntent = new Intent(LoginActivity.this, MenuUsuarioActivity.class);
                         startActivity(menuIntent);
                     }
                 }

@@ -18,11 +18,12 @@
         </activity>
         <activity android:name=".vista.CrearCategoriaActivity" />
         <activity android:name=".vista.CategoriaListaActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".vista.MenuUsuarioActivity" />
         <activity android:name=".vista.RegistroUsuarioActivity" />
         <activity android:name=".vista.ListaTareasActivity" />
         <activity android:name=".vista.DetalleTareaActivity" />
-        <activity android:name=".vista.RegistrarTareaActivity"></activity>
+        <activity android:name=".vista.RegistrarTareaActivity" />
+        <activity android:name=".vista.MenuTecnicoActivity"></activity>
     </application>
 
 </manifest>
