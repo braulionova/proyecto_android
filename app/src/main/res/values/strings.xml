@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TaskApp</string>
+    <string name="registrar_tarea_categoria">Categoria</string>
+    <string name="registrar_tarea_tecnico">Asignar a:</string>
+    <string name="registrar_tarea_descripcion">Descripción:</string>
+    <string name="registrar_tarea_descripcion_hint">Descripción de la Tarea.</string>
+    <string-array name="categorias">
+        <item>Reparación</item>
+        <item>Mantenimiento</item>
+    </string-array>
+    <string-array name="tecnicos">
+        <item>Juan Perez</item>
+        <item>Ramón Santos</item>
+    </string-array>
 </resources>

@@ -1,7 +1,10 @@
 package com.braulionova.taskapp.vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.braulionova.taskapp.R;
 
@@ -12,14 +15,19 @@ public class MenuUsuarioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //clase categoria
-        //Categoria cat = new Categoria();
+        setContentView(R.layout.activity_menu_usuario);
+        //btnRegistrarTarea
+        Button btnRegistrarTarea = findViewById(R.id.btnRegistrarTarea);
 
-        //cat.setDescripcion("CATEGORIA 1");
-        //cat.setId(2);
-        //log de la app
-        //Log.i(LOG_TAG, cat.toString());
+        btnRegistrarTarea.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MenuUsuarioActivity.this, RegistrarTareaActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
