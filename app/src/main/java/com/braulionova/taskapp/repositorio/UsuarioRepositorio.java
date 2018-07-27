@@ -12,10 +12,13 @@ public interface UsuarioRepositorio {
 
     Usuario buscar(int id);
 
+    Usuario buscarTecnicoPorNombre(String nombre);
+
     Usuario validarUsuario(String email, String contrasena);
 
     List<Usuario> buscar(String nombre);
 
     List<Usuario> buscar_todos();
 
+    List<Usuario> buscar_tecnicos();
 }

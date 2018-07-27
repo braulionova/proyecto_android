@@ -39,5 +39,18 @@ public class MenuTecnicoActivity extends AppCompatActivity {
             }
         });
 
+        //btnSalir
+        Button btnSalir = findViewById(R.id.btnSalir);
+
+        btnSalir.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MenuTecnicoActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

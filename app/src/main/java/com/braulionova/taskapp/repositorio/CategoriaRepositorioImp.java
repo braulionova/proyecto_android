@@ -71,6 +71,35 @@ public class CategoriaRepositorioImp implements CategoriaRepositorio {
     }
 
     @Override
+    public Categoria buscarPorNombre(String nombre) {
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        //columnas
+        Cursor cr =  db.rawQuery("select * from " + TABLA_CATEGORIA + " where nombre = '" + nombre + "'" , null);
+
+        cr.moveToFirst();
+
+        Categoria categoria = null;
+
+        while (!cr.isAfterLast())
+        {
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            String nombre_categoria = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+
+            categoria = new Categoria();
+            categoria.setId(id);
+            categoria.setNombre(nombre_categoria);
+            //move next
+            cr.moveToNext();
+        }
+        //close
+        cr.close();
+        db.close();
+        //return
+        return categoria;
+    }
+
+    @Override
     public List<Categoria> buscar(String buscar) {
 
         //TODO: buscar las categorias por su nombre (LIKE)

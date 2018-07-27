@@ -29,6 +29,19 @@ public class MenuUsuarioActivity extends AppCompatActivity {
             }
         });
 
+        //btnSalir
+        Button btnSalir = findViewById(R.id.btnSalir);
+
+        btnSalir.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MenuUsuarioActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

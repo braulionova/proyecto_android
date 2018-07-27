@@ -1,21 +1,35 @@
 package com.braulionova.taskapp.vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.braulionova.taskapp.R;
 import com.braulionova.taskapp.entidad.Categoria;
+import com.braulionova.taskapp.entidad.Tarea;
+import com.braulionova.taskapp.entidad.Usuario;
 import com.braulionova.taskapp.repositorio.CategoriaRepositorio;
 import com.braulionova.taskapp.repositorio.CategoriaRepositorioImp;
-
+import com.braulionova.taskapp.repositorio.TareaRepositorio;
+import com.braulionova.taskapp.repositorio.TareaRepositorioDbImpl;
+import com.braulionova.taskapp.repositorio.UsuarioRepositorio;
+import com.braulionova.taskapp.repositorio.UsuarioRepositorioDbImpl;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class RegistrarTareaActivity extends AppCompatActivity {
 
     private CategoriaRepositorio categoriaRepositorio;
+    private UsuarioRepositorio usuarioRepositorio;
+    private TareaRepositorio tareaRepositorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +45,111 @@ public class RegistrarTareaActivity extends AppCompatActivity {
             categorias_array_list.add(categoria != null ? categoria.getNombre() : null);
         }
         //spinner_categorias
-        Spinner spinnerCategorias = findViewById(R.id.spinner_categorias);
+        final Spinner spinnerCategorias = findViewById(R.id.spinner_categorias);
         // create the adapter.
-        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_dropdown_item, categorias_array_list);
-        spinner_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerCategorias.setAdapter(spinner_adapter);
+        final ArrayAdapter<String> spinner_adapter_categorias = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_dropdown_item, categorias_array_list);
+        spinner_adapter_categorias.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerCategorias.setAdapter(spinner_adapter_categorias);
+        //usuario repositorio
+        usuarioRepositorio = new UsuarioRepositorioDbImpl(this);
+        List<Usuario> listTecnicos = usuarioRepositorio.buscar_tecnicos();
+        //array list
+        List<String> tecnicos_array_list = new ArrayList<>(listTecnicos.size());
+        for (Usuario usuario : listTecnicos) {
+            tecnicos_array_list.add(usuario != null ? usuario.getNombre() : null);
+        }
+        //spinner_categorias
+        final Spinner spinnerTecnicos = findViewById(R.id.spinner_tecnicos);
+        // create the adapter.
+        ArrayAdapter<String> spinner_adapter_tecnicos = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_dropdown_item, tecnicos_array_list);
+        spinner_adapter_tecnicos.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerTecnicos.setAdapter(spinner_adapter_tecnicos);
+        //btnCancelarTarea
+        Button btnCancelarTarea = findViewById(R.id.btnCancelarTarea);
+        //on click
+        btnCancelarTarea.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(RegistrarTareaActivity.this, MenuUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //btnGuardarTarea
+        Button btnGuardarTarea = findViewById(R.id.btnGuardarTarea);
+        //on click
+        btnGuardarTarea.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                tareaRepositorio = new TareaRepositorioDbImpl(getApplicationContext());
+
+                Tarea tarea = null;
+                String textCategoria = spinnerCategorias.getSelectedItem().toString();
+                String textTecnico = spinnerTecnicos.getSelectedItem().toString();
+
+                Categoria categoria = categoriaRepositorio.buscarPorNombre(textCategoria);
+
+                Usuario usuario_asignado = usuarioRepositorio.buscarTecnicoPorNombre(textTecnico);
+
+                //Toast toast = Toast.makeText(getApplicationContext(), "Categoria: " + categoria.getId() + ", " + categoria.getNombre(), Toast.LENGTH_SHORT);
+                //toast.show();
+
+                //mensaje
+                //Toast toast = Toast.makeText(getApplicationContext(), "Categoria: " + textCategoria, Toast.LENGTH_SHORT);
+                //toast.show();
+
+                //mensaje
+                //Toast toast2 = Toast.makeText(getApplicationContext(), "Tecnico: " + textTecnico, Toast.LENGTH_SHORT);
+                //toast2.show();
+
+                boolean nuevo = false;
+
+                if(tarea == null)
+                {
+                    nuevo = true;
+                    tarea = new Tarea();
+                }
+                //nombre
+                tarea.setNombre("Tarea reportada");
+                //fecha
+                Date currentTime = Calendar.getInstance().getTime();
+                tarea.setFecha(currentTime);
+
+                //mensaje
+                //Toast toastFecha = Toast.makeText(getApplicationContext(), "Fecha: " + currentTime.toString(), Toast.LENGTH_SHORT);
+                //toastFecha.show();
+                //categoria_id
+                tarea.setCategoria(categoria);
+                //usuario_asignado_id
+                tarea.setUsuarioAgignado(usuario_asignado);
+                //Toast toastAsignado = Toast.makeText(getApplicationContext(), "Asignado: " + usuario_asignado.getId() + " " + usuario_asignado.getNombre(), Toast.LENGTH_SHORT);
+                //toastAsignado.show();
+
+                if(nuevo) {
+                    //guardar
+                    //tareaRepositorio.guardar(tarea);
+
+                    //mensaje
+                    Toast toastSave = Toast.makeText(getApplicationContext(), "Guardado correctamente.", Toast.LENGTH_SHORT);
+                    toastSave.show();
+                    //en blanco luego de guardar
+                    spinnerCategorias.setId(0);
+                }
+                else {
+                    //tareaRepositorio.actualizar(tarea);
+                    //mensaje
+                    Toast toast_update = Toast.makeText(getApplicationContext(), "Actualizado correctamente.", Toast.LENGTH_SHORT);
+                    //toast1.setGravity(Gravity.CENTER,,);
+                    toast_update.show();
+                    //intent
+                    Intent regTareaIntent = new Intent(RegistrarTareaActivity.this, MenuUsuarioActivity.class);
+                    startActivity(regTareaIntent);
+                }
+            }
+        });
     }
 }
