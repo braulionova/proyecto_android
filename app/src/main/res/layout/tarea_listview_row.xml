@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff">
+    <!-- Row 1 with single column -->
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:stretchColumns="1">
+
+        <TextView
+            android:id="@+id/lbFecha"
+            android:layout_weight="1"
+            android:text="28/07/2018"
+            android:textSize="24sp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_span="2"/>
+    </TableRow>
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:stretchColumns="1">
+
+        <TextView
+            android:id="@+id/lbDescripcion"
+            android:layout_weight="1"
+            android:text="No funciona la pc por nada en la vida"
+            android:textSize="24sp"
+            android:layout_gravity="left|center_vertical" />
+    </TableRow>
+
+
+</TableLayout>
