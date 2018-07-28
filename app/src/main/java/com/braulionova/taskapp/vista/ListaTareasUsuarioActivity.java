@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.braulionova.taskapp.R;
 
-public class ListaTareasActivity extends AppCompatActivity {
+public class ListaTareasUsuarioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_tareas);
+        setContentView(R.layout.activity_lista_tareas_usuario);
     }
 }

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.braulionova.taskapp.R;
+import com.braulionova.taskapp.entidad.AppConfig;
 import com.braulionova.taskapp.entidad.Usuario;
 import com.braulionova.taskapp.repositorio.UsuarioRepositorio;
 import com.braulionova.taskapp.repositorio.UsuarioRepositorioDbImpl;
@@ -77,6 +78,8 @@ public class LoginActivity extends Activity {
                         //mensaje
                         Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido, " + usuario.getNombre(), Toast.LENGTH_LONG);
                         toast.show();
+                        //guardamos el usuario en la clase AppConfig
+                        AppConfig.getConfig().setUsuario(usuario);
                         //ir al menu principal
                         Intent menuIntent = new Intent(LoginActivity.this, MenuTecnicoActivity.class);
                         startActivity(menuIntent);
@@ -85,6 +88,8 @@ public class LoginActivity extends Activity {
                         //mensaje
                         Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido, " + usuario.getNombre(), Toast.LENGTH_LONG);
                         toast.show();
+                        //guardamos el usuario en la clase AppConfig
+                        AppConfig.getConfig().setUsuario(usuario);
                         //ir al menu principal
                         Intent menuIntent = new Intent(LoginActivity.this, MenuUsuarioActivity.class);
                         startActivity(menuIntent);

@@ -54,13 +54,8 @@ public class Usuario {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Usuario{");
-        sb.append("id=").append(id);
-        sb.append(", nombre='").append(nombre).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", contraseña='").append(contrasena).append('\'');
-        sb.append(", tipoUsuario=").append(tipoUsuario);
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer();
+        sb.append(nombre);
         return sb.toString();
     }
 
