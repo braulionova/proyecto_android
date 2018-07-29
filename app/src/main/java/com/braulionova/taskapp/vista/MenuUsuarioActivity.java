@@ -41,7 +41,17 @@ public class MenuUsuarioActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //btnVerTareas
+        Button btnVerTareas = findViewById(R.id.btnVerTareas);
 
-
+        btnVerTareas.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MenuUsuarioActivity.this, ListaTareasUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

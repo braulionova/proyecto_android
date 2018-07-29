@@ -156,7 +156,7 @@ public class TareaRepositorioDbImpl implements TareaRepositorio {
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
         //columnas
-        Cursor cr =  db.rawQuery("select * from " + TABLA_TAREA , null);
+        Cursor cr =  db.rawQuery("select * from " + TABLA_TAREA + " where " +  CAMPO_USUARIO_CREADOR_ID + " = " + usuario.getId().toString() , null);
 
         cr.moveToFirst();
 
