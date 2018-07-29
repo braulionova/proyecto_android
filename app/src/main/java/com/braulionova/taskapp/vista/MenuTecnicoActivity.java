@@ -51,6 +51,17 @@ public class MenuTecnicoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        //btnListaTareas
+        Button btnListaTareas = findViewById(R.id.btnListaTareas);
+        //btnListaTareas click
+        btnListaTareas.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MenuTecnicoActivity.this, ListaTareasTecnicoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

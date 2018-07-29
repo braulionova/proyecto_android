@@ -73,7 +73,46 @@ public class UsuarioRepositorioDbImpl implements UsuarioRepositorio {
 
     @Override
     public Usuario buscar(int id) {
-        return null;
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        //columnas
+        Cursor cr =  db.rawQuery("select * from " + TABLA_USUARIO + " where id = '" + id + "'" , null);
+
+        cr.moveToFirst();
+
+        Usuario usuario = null;
+
+        //cursor
+        if (cr.moveToFirst())
+        {
+            do {
+                int idUsuario = cr.getInt(cr.getColumnIndex("id"));
+                String nombre_usuario = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+                String email_usuario = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+                Encryption encryption = Encryption.getDefault("NovaLab", "braulion", new byte[16]);
+                String decrypted = encryption.decryptOrNull(cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA)));
+                String contrasena_usuario = decrypted;
+                String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPO_USUARIO));
+                //usuario
+                usuario = new Usuario();
+                usuario.setId(idUsuario);
+                usuario.setNombre(nombre_usuario);
+                usuario.setEmail(email_usuario);
+                usuario.setContrasena(contrasena_usuario);
+                if (tipoUsuario.equals("TECNICO")) {
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.TECNICO);
+                } else {
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.NORMAL);
+                }
+
+            }
+            while (cr.moveToNext());
+        }
+        //close
+        cr.close();
+        db.close();
+        //return
+        return usuario;
     }
 
     @Override

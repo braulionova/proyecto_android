@@ -1,8 +1,9 @@
 package com.braulionova.taskapp.entidad;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tarea {
+public class Tarea implements Serializable {
 
     public enum TareaEstado{
         PENDIENTE,
@@ -18,7 +19,7 @@ public class Tarea {
     private TareaEstado estado;
     private Categoria categoria;
     private Usuario usuarioCreador;
-    private Usuario usuarioAgignado;
+    private Usuario usuarioAsignado;
 
     public Integer getId() {
         return id;
@@ -84,12 +85,12 @@ public class Tarea {
         this.usuarioCreador = usuarioCreador;
     }
 
-    public Usuario getUsuarioAgignado() {
-        return usuarioAgignado;
+    public Usuario getUsuarioAsignado() {
+        return usuarioAsignado;
     }
 
-    public void setUsuarioAgignado(Usuario usuarioAgignado) {
-        this.usuarioAgignado = usuarioAgignado;
+    public void setUsuarioAsignado(Usuario usuarioAsignado) {
+        this.usuarioAsignado = usuarioAsignado;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class Tarea {
         sb.append(", estado=").append(estado);
         sb.append(", categoria=").append(categoria);
         sb.append(", usuarioCreador=").append(usuarioCreador);
-        sb.append(", usuarioAgignado=").append(usuarioAgignado);
+        sb.append(", usuarioAsignado=").append(usuarioAsignado);
         sb.append('}');
         return sb.toString();
     }

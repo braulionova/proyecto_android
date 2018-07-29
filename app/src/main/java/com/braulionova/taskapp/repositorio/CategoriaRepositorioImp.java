@@ -67,7 +67,32 @@ public class CategoriaRepositorioImp implements CategoriaRepositorio {
 
     @Override
     public Categoria buscar(int id) {
-        return null;
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        //columnas
+        Cursor cr =  db.rawQuery("select * from " + TABLA_CATEGORIA + " where id = '" + id + "'" , null);
+
+        cr.moveToFirst();
+
+        Categoria categoria = null;
+
+        while (!cr.isAfterLast())
+        {
+            int idCategoria = cr.getInt(cr.getColumnIndex("id"));
+            String nombre_categoria = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+
+            categoria = new Categoria();
+            categoria.setId(idCategoria);
+            categoria.setNombre(nombre_categoria);
+            //move next
+            cr.moveToNext();
+        }
+        //close
+        cr.close();
+        db.close();
+        //return
+        return categoria;
     }
 
     @Override

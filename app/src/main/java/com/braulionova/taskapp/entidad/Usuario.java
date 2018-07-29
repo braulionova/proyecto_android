@@ -1,6 +1,8 @@
 package com.braulionova.taskapp.entidad;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     public enum TipoUsuario{
         TECNICO, NORMAL

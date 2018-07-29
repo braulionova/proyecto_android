@@ -127,7 +127,7 @@ public class RegistrarTareaActivity extends AppCompatActivity {
                 //Toast toastCategoria = Toast.makeText(getApplicationContext(), "Categoria: " + categoria.getId() + " " + categoria.getNombre(), Toast.LENGTH_SHORT);
                 //toastCategoria.show();
                 //usuario_asignado_id
-                tarea.setUsuarioAgignado(usuario_asignado);
+                tarea.setUsuarioAsignado(usuario_asignado);
                 //Toast toastAsignado = Toast.makeText(getApplicationContext(), "Asignado: " + usuario_asignado.getId() + " " + usuario_asignado.getNombre(), Toast.LENGTH_SHORT);
                 //toastAsignado.show();
                 tarea.setUsuarioCreador(AppConfig.getConfig().getUsuario());

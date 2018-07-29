@@ -4,6 +4,7 @@ package com.braulionova.taskapp.repositorio;
 import com.braulionova.taskapp.entidad.Tarea;
 import com.braulionova.taskapp.entidad.Usuario;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface TareaRepositorio {
@@ -14,7 +15,7 @@ public interface TareaRepositorio {
 
     Tarea buscar(int id);
 
-    List<Tarea> buscarAsignadaA(Usuario usuario);
+    List<Tarea> buscarAsignadaA(Usuario usuario) throws ParseException;
 
     List<Tarea> buscarCreadaPor(Usuario usuario);
 
