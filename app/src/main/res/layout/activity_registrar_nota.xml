@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vista.RegistrarNotaActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/registrar_nota_mensaje"
+        android:textColor="@color/black"/>
+    <EditText
+        android:id="@+id/txtMensajeNota"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:inputType="textLongMessage"
+        android:hint="@string/registrar_nota_mensaje_hint"
+        android:maxLength="760"
+        android:gravity="top"
+        android:lines="6"
+        android:textColor="@color/black"
+        />
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCancelarNota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+        <Button
+            android:id="@+id/btnGuardarNota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:background="@color/green"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

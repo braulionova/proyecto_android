@@ -4,6 +4,8 @@
     <string name="registrar_tarea_tecnico">Asignar a:</string>
     <string name="registrar_tarea_descripcion">Descripción:</string>
     <string name="registrar_tarea_descripcion_hint">Descripción de la Tarea.</string>
+    <string name="registrar_nota_mensaje">Mensaje</string>
+    <string name="registrar_nota_mensaje_hint">Escribe tu mensaje.</string>
     <string-array name="categorias">
         <item>Reparación</item>
         <item>Mantenimiento</item>

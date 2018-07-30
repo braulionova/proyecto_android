@@ -78,6 +78,14 @@ public class TareaRepositorioDbImpl implements TareaRepositorio {
     }
 
     @Override
+    public void actualizarEstatus(Tarea tarea) {
+        //db
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+        //sql to update estatus
+        db.execSQL("update " + TABLA_TAREA + " set " + CAMPO_ESTADO + " = '" + tarea.getEstado() + "' where id = " + tarea.getId());
+    }
+
+    @Override
     public Tarea buscar(int id) {
         return null;
     }

@@ -16,5 +16,8 @@ public class EstructuraDb {
                     "nombre TEXT, fecha NUMERIC, usuario_creador_id INTEGER," +
                     " usuario_asignado_id INTEGER, estado TEXT DEFAULT 'PENDIENTE', " +
                     "descripcion TEXT, categoria_id INTEGER)";
+    //tabla nota
+    public static final String TABLA_NOTA =
+            "CREATE TABLE nota ( id INTEGER PRIMARY KEY AUTOINCREMENT, mensaje TEXT, fecha NUMERIC, usuario_id INTEGER, tarea_id INTEGER )";
 
 }

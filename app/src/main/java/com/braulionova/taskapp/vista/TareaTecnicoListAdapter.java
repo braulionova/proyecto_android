@@ -69,7 +69,12 @@ public class TareaTecnicoListAdapter extends BaseAdapter {
         //lbCategoria
         lbCategoria.setText(tarea.getCategoria().getNombre());
         //lbEstado
-        lbEstado.setText(tarea.getEstado().name());
+        if(tarea.getEstado().equals(Tarea.TareaEstado.EN_PROCESO)) {
+            lbEstado.setText("EN PROCESO");
+        }
+        else {
+            lbEstado.setText(tarea.getEstado().name());
+        }
         //return vista con datos
         return view;
     }

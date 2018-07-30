@@ -9,12 +9,11 @@ public class ConexionDb extends SQLiteOpenHelper{
 
     private static final String LOG_TAG = "ConexionDb";
     private static final String NOMBRE_DB = "taskpp.db";
-    private static final int VERSION_DB = 3;
+    private static final int VERSION_DB = 4;
 
     //CONEXION DB
     public ConexionDb(Context context) {
         super(context, NOMBRE_DB, null, VERSION_DB);
-
     }
 
     @Override
@@ -27,6 +26,8 @@ public class ConexionDb extends SQLiteOpenHelper{
         db.execSQL(EstructuraDb.TABLA_USUARIO);
         //tabla tarea
         db.execSQL(EstructuraDb.TABLA_TAREA);
+        //tabla nota
+        db.execSQL(EstructuraDb.TABLA_NOTA);
     }
 
     @Override
@@ -41,10 +42,9 @@ public class ConexionDb extends SQLiteOpenHelper{
             db.execSQL(EstructuraDb.TABLA_USUARIO);
             //tabla tarea
             db.execSQL(EstructuraDb.TABLA_TAREA);
+            //tabla nota
+            db.execSQL(EstructuraDb.TABLA_NOTA);
         }
-
-        db.execSQL("DROP TABLE IF EXISTS " + EstructuraDb.TABLA_TAREA);
-        onCreate(db);
 
 
     }

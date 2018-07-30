@@ -13,6 +13,8 @@ public interface TareaRepositorio {
 
     boolean actualizar(Tarea tarea);
 
+    void actualizarEstatus(Tarea tarea);
+
     Tarea buscar(int id);
 
     List<Tarea> buscarAsignadaA(Usuario usuario) throws ParseException;

@@ -24,7 +24,8 @@
         <activity android:name=".vista.DetalleTareaActivity" />
         <activity android:name=".vista.RegistrarTareaActivity" />
         <activity android:name=".vista.MenuTecnicoActivity" />
-        <activity android:name=".vista.ListaTareasUsuarioActivity"></activity>
+        <activity android:name=".vista.ListaTareasUsuarioActivity" />
+        <activity android:name=".vista.RegistrarNotaActivity"></activity>
     </application>
 
 </manifest>
