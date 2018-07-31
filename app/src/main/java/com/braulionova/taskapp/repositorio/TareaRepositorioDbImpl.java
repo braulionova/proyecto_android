@@ -87,7 +87,66 @@ public class TareaRepositorioDbImpl implements TareaRepositorio {
 
     @Override
     public Tarea buscar(int id) {
-        return null;
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        //columnas
+        Cursor cr =  db.rawQuery("select * from " + TABLA_TAREA + " where id = " + id , null);
+
+        cr.moveToFirst();
+
+        Tarea tarea = null;
+
+        //cursor
+        if (cr.moveToFirst())
+        {
+            do {
+                int idTarea = cr.getInt(cr.getColumnIndex("id"));
+                String nombreTarea = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+                String fecha = cr.getString(cr.getColumnIndex(CAMPO_FECHA));
+                String usuarioCreadorId = cr.getString(cr.getColumnIndex(CAMPO_USUARIO_CREADOR_ID));
+                String usuarioAsignadoId = cr.getString(cr.getColumnIndex(CAMPO_USUARIO_ASIGNADO_ID));
+                String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+                String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+                String categoriaId = cr.getString(cr.getColumnIndex(CAMPO_CATEGORIA_ID));
+
+                //usuario
+                tarea = new Tarea();
+                //id
+                tarea.setId(idTarea);
+                //nombre
+                tarea.setNombre(nombreTarea);
+                //fecha
+                Date fechaTarea = null;
+                try {
+                    SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+                    fechaTarea = parser.parse(fecha);
+                } catch (ParseException e) {
+                    //e.printStackTrace();
+                }
+                tarea.setFecha(fechaTarea);
+                //usuario creador
+                UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorioDbImpl(this.context);
+                Usuario usuarioCreador = usuarioRepositorio.buscar(Integer.parseInt(usuarioCreadorId));
+                tarea.setUsuarioCreador(usuarioCreador);
+                //usuario asignado
+                Usuario usuarioAsignado = usuarioRepositorio.buscar(Integer.parseInt(usuarioAsignadoId));
+                tarea.setUsuarioAsignado(usuarioAsignado);
+                //estado
+                tarea.setEstado(Tarea.TareaEstado.valueOf(estado));
+                tarea.setDescripcion(descripcion);
+                //buscar categoria
+                CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorioImp(this.context);
+                Categoria categoria = categoriaRepositorio.buscar(Integer.parseInt(categoriaId));
+                tarea.setCategoria(categoria);
+            }
+            while (cr.moveToNext());
+        }
+        //close
+        cr.close();
+        db.close();
+        //return
+        return tarea;
     }
 
     @Override

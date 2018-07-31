@@ -5,16 +5,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.braulionova.taskapp.R;
 import com.braulionova.taskapp.entidad.AppConfig;
+import com.braulionova.taskapp.entidad.Nota;
 import com.braulionova.taskapp.entidad.Tarea;
 import com.braulionova.taskapp.entidad.Usuario;
+import com.braulionova.taskapp.repositorio.NotaRepositorio;
+import com.braulionova.taskapp.repositorio.NotaRepositorioDbImpl;
 import com.braulionova.taskapp.repositorio.TareaRepositorio;
 import com.braulionova.taskapp.repositorio.TareaRepositorioDbImpl;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class DetalleTareaActivity extends AppCompatActivity {
 
@@ -85,23 +90,44 @@ public class DetalleTareaActivity extends AppCompatActivity {
                 else{
                     btnTareaLista.setVisibility(View.INVISIBLE);
                 }
-            }
-            //on click
-            btnTareaLista.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
+
+                //on click
+                btnTareaLista.setOnClickListener(new View.OnClickListener()
                 {
-                    tareaRepositorio = new TareaRepositorioDbImpl(getApplicationContext());
-                    tarea.setEstado(Tarea.TareaEstado.TERMINADO);
-                    tareaRepositorio.actualizarEstatus(tarea);
-                    Toast toast = Toast.makeText(getApplicationContext(), "Tarea Finalizada.", Toast.LENGTH_LONG);
-                    toast.show();
-                    //luego de actualizar el estatus redireccionamos al menu del tecnico
-                    Intent intent = new Intent(DetalleTareaActivity.this, MenuTecnicoActivity.class);
-                    startActivity(intent);
-                }
-            });
+                    @Override
+                    public void onClick(View view)
+                    {
+                        tareaRepositorio = new TareaRepositorioDbImpl(getApplicationContext());
+                        tarea.setEstado(Tarea.TareaEstado.TERMINADO);
+                        tareaRepositorio.actualizarEstatus(tarea);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Tarea Finalizada.", Toast.LENGTH_LONG);
+                        toast.show();
+                        //luego de actualizar el estatus redireccionamos al menu del tecnico
+                        Intent intent = new Intent(DetalleTareaActivity.this, MenuTecnicoActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                //btnAgregarNotaTarea
+                Button btnAgregarNotaTarea = findViewById(R.id.btnAgregarNotaTarea);
+                btnAgregarNotaTarea.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        //Agregar nota a la Tarea
+                        Intent intent = new Intent(DetalleTareaActivity.this, RegistrarNotaActivity.class);
+                        intent.putExtra("tarea", tarea);
+                        startActivity(intent);
+                    }
+                });
+                //lista de notas
+                NotaRepositorio notaRepositorio = new NotaRepositorioDbImpl(this);
+                List<Nota> notas = notaRepositorio.buscarNotasPorTarea(tarea.getId());
+                //listView notas
+                ListView notasListView = (ListView) findViewById(R.id.lvNotas);
+                //adapter
+                notasListView.setAdapter(new NotaListAdapter(this, notas));
+            }
         }
         catch (Exception ex)
         {

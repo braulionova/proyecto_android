@@ -18,6 +18,6 @@ public class EstructuraDb {
                     "descripcion TEXT, categoria_id INTEGER)";
     //tabla nota
     public static final String TABLA_NOTA =
-            "CREATE TABLE nota ( id INTEGER PRIMARY KEY AUTOINCREMENT, mensaje TEXT, fecha NUMERIC, usuario_id INTEGER, tarea_id INTEGER )";
+            "CREATE TABLE IF NOT EXISTS nota ( id INTEGER PRIMARY KEY AUTOINCREMENT, mensaje TEXT, fecha NUMERIC, usuario_id INTEGER, tarea_id INTEGER )";
 
 }

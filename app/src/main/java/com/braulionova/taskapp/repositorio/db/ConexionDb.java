@@ -9,7 +9,7 @@ public class ConexionDb extends SQLiteOpenHelper{
 
     private static final String LOG_TAG = "ConexionDb";
     private static final String NOMBRE_DB = "taskpp.db";
-    private static final int VERSION_DB = 4;
+    private static final int VERSION_DB = 5;
 
     //CONEXION DB
     public ConexionDb(Context context) {
@@ -45,7 +45,8 @@ public class ConexionDb extends SQLiteOpenHelper{
             //tabla nota
             db.execSQL(EstructuraDb.TABLA_NOTA);
         }
-
+        //tabla nota
+        db.execSQL(EstructuraDb.TABLA_NOTA);
 
     }
 }

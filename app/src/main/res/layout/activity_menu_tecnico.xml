@@ -14,12 +14,6 @@
         android:layout_height="wrap_content"
         android:text="Lista de Tareas" />
     <Button
-        android:id="@+id/btnListaTareasPendientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tareas Pendientes"/>
-
-    <Button
         android:id="@+id/btnCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
